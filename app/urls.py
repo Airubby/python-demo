@@ -14,14 +14,16 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import re_path
 from cmdb import views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    re_path('admin/', admin.site.urls),
     # path('home', views.home),
-    path('login',views.login),
-    path('home', views.Home.as_view()), #as_view()固定写法
-    path('index',views.index),
+    re_path('login',views.login),
+    re_path('home', views.Home.as_view()), #as_view()固定写法
+    re_path('index',views.index),
+    #path('detail/',views.detail), #以?传参显示
+    re_path('detail-(\d+)',views.detail),  #不以?传参显示 re_path('detail-(\d+).html',views.detail), 然后url跳转时也加.html
 ]

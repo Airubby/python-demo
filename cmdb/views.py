@@ -22,21 +22,21 @@ from django.shortcuts import HttpResponse
 #             error_msg="用户名或密码错误"
 #     return render(request,'login.html',{'error_msg':error_msg})
 
-USER_LIST=[
-    {'id':111,'username':'airubby','email':'airubby@qq.com','gender':'man'},
-]
-for index in range(2):
-    temp={'id':index,'username':'airubby'+str(index),'email':'airubby@qq.com','gender':'man'}
-    USER_LIST.append(temp)
-
-def home(request):
-    username = request.POST.get('username', None)
-    email = request.POST.get('email', None)
-    gender = request.POST.get('gender', None)
-    temp={'id':username,'username':username,'email':email,'gender':gender}
-    USER_LIST.append(temp)
-    return render(request, 'home.html',{"user_list":USER_LIST})
-
+# USER_LIST=[
+#     {'id':111,'username':'airubby','email':'airubby@qq.com','gender':'man'},
+# ]
+# for index in range(2):
+#     temp={'id':index,'username':'airubby'+str(index),'email':'airubby@qq.com','gender':'man'}
+#     USER_LIST.append(temp)
+#
+# def home(request):
+#     username = request.POST.get('username', None)
+#     email = request.POST.get('email', None)
+#     gender = request.POST.get('gender', None)
+#     temp={'id':username,'username':username,'email':email,'gender':gender}
+#     USER_LIST.append(temp)
+#     return render(request, 'home.html',{"user_list":USER_LIST})
+#
 
 def login(request):
     # f = open('templates/login.html', 'r', encoding='utf-8')
@@ -65,3 +65,23 @@ def login(request):
         else:
             error_msg="用户名或密码错误"
     return render(request,'login.html',{'error_msg':error_msg})
+
+
+from django.views import View
+
+class Home(View):
+
+    def dispatch(self, request, *args, **kwargs): #dispatch先执行,无论函数在前还是在后
+        # 调用父类的dispatch,before，after都会执行，可以定制功能
+        print('before')
+        result=super(Home,self).dispatch(request,*args,**kwargs)
+        print('after')
+        return result
+
+    def get(self,request):
+        print(request.method)
+        return render(request,'home.html')
+
+    def post(self,request):
+        print(request.method,'POST')
+        return render(request, 'home.html')

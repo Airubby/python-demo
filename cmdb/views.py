@@ -85,3 +85,19 @@ class Home(View):
     def post(self,request):
         print(request.method,'POST')
         return render(request, 'home.html')
+
+
+USER_DICT={
+    'k1':'123',
+    'k2':'333',
+}
+#
+# USER_DICT={
+#     '1':{'name':'root1','email':'root@qq.com'},
+#     '2':{'name':'root2','email':'root@qq.com'},
+#     '3':{'name':'root3','email':'root@qq.com'},
+#     '4':{'name':'root4','email':'root@qq.com'},
+#     '5':{'name':'root5','email':'root@qq.com'},
+# }
+def index(request):
+    return render(request,'index.html',{'user_dict':USER_DICT})

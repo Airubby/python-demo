@@ -23,4 +23,5 @@ urlpatterns = [
     # path('home', views.home),
     path('login',views.login),
     path('home', views.Home.as_view()), #as_view()固定写法
+    path('index',views.index),
 ]

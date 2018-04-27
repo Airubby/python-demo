@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .menu{
+            display: block;
+            padding: 5px;
+
+        }
+    </style>
+</head>
+<body>
+    {{ user_dict. }}
+    <ul>
+        {% for k,row in user_dict.items %}
+        <li>{{ k }}-{{ row }}</li>
+        {% endfor %}
+    </ul>
+
+
+</body>
+</html>

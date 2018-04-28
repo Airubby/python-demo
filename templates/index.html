@@ -30,6 +30,25 @@
 {#        {% endfor %}#}
 {#    </ul>#}
 
+{# action="{% url 'indexform' %}"只接受第一层级比如'/index#}
+{#action="{% url 'indexform' 2 %}"  跳转到固定/index/2#}
+{#action="{{ request.path_info }}"  接受整个URL#}
+
+    <form action="{{ request.path_info }}" method="post">
+        <p>
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="username">
+        </p>
+        <p>
+            <label for="password">密码：</label>
+            <input type="text" id="password" name="password">
+        </p>
+        <p>
+            <label for="password">邮箱：</label>
+            <input type="text" id="email" name="email">
+        </p>
+        <p><input type="submit" value="提交"></p>
+    </form>
     <ul>
         {% for k,row in user_dict.items %}
         <li>

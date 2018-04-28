@@ -109,10 +109,14 @@ def index(request):
 #     return render(request,'detail.html',{'detail_info':detail_info})
 
 #不以?传参
-def detail(request,nid):
+def detail(request,nid):  #nid就是urls.py中的(\d+)，urls中给几个参数，这里需要几个接受参数
     detail_info=USER_DICT[nid]
     return render(request,'detail.html',{'detail_info':detail_info})
 
+# def detail(request,*args):  #(,**kwargs )
+#     detail_info=USER_DICT[nid]
+#     return render(request,'detail.html',{'detail_info':detail_info})
+#
 
 
 

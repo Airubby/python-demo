@@ -1,0 +1,33 @@
+1. 创建Django工程
+        django-admin startproject 工程名
+
+2. 创建APP
+    cd 工程名
+    python manage.py startapp cmdb
+
+3、静态文件
+    project.settings.py
+
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+    )
+
+4、模板路径
+
+    DIRS ==>    [os.path.join(BASE_DIR,'templates'),]
+
+5、settings中
+
+    middlerware
+
+        # 注释 csrf
+
+
+6、定义路由规则
+    url.py
+
+6、根据类自动创建数据库表
+    # app下的models.py
+
+    python manage.py  makemigrations
+    python manage.py  migrate

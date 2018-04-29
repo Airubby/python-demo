@@ -119,6 +119,43 @@ def detail(request,nid):  #nid就是urls.py中的(\d+)，urls中给几个参数�
 #
 
 
+#测试往数据库中添加数据
+from cmdb import models
+def orm(request):
+    #创建方法一，推荐这种
+    # models.UserInfo.objects.create(
+    #     username='root',
+    #     password='xie123',
+    #     email='airubby@qq.com'
+    # )
+    #或者
+    # dic={'username':'root','password':'xie123','email':'airubby@qq.com'}
+    # models.UserInfo.objects.create(**dic)
+    #创建方法二
+    # obj=models.UserInfo(
+    #     username='root',
+    #     password='xie123',
+    #     email='airubby@qq.com'
+    # )
+    # obj.save()
 
+    #查
+    # result=models.UserInfo.objects.all()
+    # for row in result:
+    #     print(row.id,row.username,row.password,row.email)
+    # result = models.UserInfo.objects.filter(username='root')
+    # for row in result:
+    #     print(row.id,row.username,row.password,row.email)
+
+    # #删
+    # models.UserInfo.objects.filter(username='root1').delete()
+
+    #改
+    # models.UserInfo.objects.all().update(password=666)
+    models.UserInfo.objects.filter(id=3).update(password=6666666)
+    
+
+
+    return HttpResponse('ORM')
 
 

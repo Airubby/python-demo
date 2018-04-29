@@ -12,6 +12,7 @@ urlpatterns = [
     #path('detail/',views.detail), #以?传参显示
     #re_path('detail-(\d+)',views.detail),  #不以?传参显示 re_path('detail-(\d+).html',views.detail), 然后url跳转时也加.html
     re_path('detail-(?P<nid>\d+)',views.detail), #这样传参views.py中就匹配nid的参数，无论形式参数先后顺序，传多个参数
+    re_path('orm',views.orm),
 ]
 
 

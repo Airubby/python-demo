@@ -9,7 +9,7 @@ class UserInfo(models.Model):
     password=models.CharField(max_length=32)
     email=models.CharField(max_length=32)
     test = models.EmailField(max_length=32, null=True)
-
+    user_group=models.ForeignKey("UserGroup",to_field='uid',on_delete=models.CASCADE)
     user_type_choice=(
         (1,'超级用户'),
         (2, '普通用户'),

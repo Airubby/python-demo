@@ -28,7 +28,8 @@ def index(request):
 def user_info(request):
     if request.method=='GET':
         user_list=models.UserInfo.objects.all()
-        return render(request, 'user_info.html',{'user_list':user_list})
+        group_list=models.UserGroup.objects.all()
+        return render(request, 'user_info.html',{'user_list':user_list,'group_list':group_list})
     elif request.method=='POST':
         user=request.POST.get('username')
         passw = request.POST.get('password')
@@ -54,3 +55,6 @@ def user_edit(request,nid):
         passw = request.POST.get('password')
         models.UserInfo.objects.filter(id=nid).update(username=user,password=passw)
         return redirect('/cmdb/user_info')
+
+def orm(request):
+    return HttpResponse("OK")

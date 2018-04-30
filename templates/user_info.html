@@ -26,6 +26,11 @@
             <form method="POST" action="/cmdb/user_info">
                 <input type="text" name="username" />
                 <input type="text" name="password" />
+                <select>
+                    {% for item in group_list %}
+                    <option value="item.uid">{{ item.caption }}</option>
+                    {% endfor %}
+                </select>
                 <input type="submit" value="添加"/>
             </form>
 
@@ -34,6 +39,7 @@
                 {% for row in user_list %}
                     <li>
                         <a href="/cmdb/userdetail-{{ row.id }}">{{ row.username }}</a> |
+                        <span>{{ row.user_group.caption }}</span>
                         <a href="/cmdb/userdel-{{ row.id }}">删除</a> |
                         <a href="/cmdb/useredit-{{ row.id }}">编辑</a>
                     </li>

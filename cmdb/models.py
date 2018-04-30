@@ -8,3 +8,10 @@ class UserInfo(models.Model):
     username=models.CharField(max_length=32)
     password=models.CharField(max_length=32)
     email=models.CharField(max_length=32)
+    #email = models.EmailField(max_length=32, null=True)
+
+
+
+class UserGroup(models.Model):
+    uid=models.AutoField(primary_key=True)
+    caption=models.CharField(max_length=32)

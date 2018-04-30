@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-    <form action="/login" method="post" enctype="multipart/form-data">
+    <form action="/cmdb/login" method="post" enctype="multipart/form-data">
         <p>
             <label for="username">用户名：</label>
             <input type="text" id="username" name="username">
@@ -22,22 +22,8 @@
             <input type="text" id="password" name="password">
         </p>
         <p>
-            男：<input type="radio" name="gender" value="1">
-            女：<input type="radio" name="gender" value="2">
-        </p>
-        <p>
-            靓仔：<input type="checkbox" name="favor" value="11">
-            美女：<input type="checkbox" name="favor" value="22">
-        </p>
-        <p>
-            <select name="city" multiple>
-                <option value="sh">上海</option>
-                <option value="bj">北京</option>
-                <option value="cd">成都</option>
-            </select>
-        </p>
-        <p>
-            <input type="file" name="fileinfo">
+            <label for="email">邮箱：</label>
+            <input type="text" id="email" name="email">
         </p>
         <p><input type="submit" value="提交"></p>
     </form>

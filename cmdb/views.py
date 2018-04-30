@@ -5,6 +5,7 @@ from cmdb import models
 
 
 def login(request):
+    models.UserGroup.objects.create(caption='DBA')
     if request.method=="GET":
         return render(request,'login.html')
     elif request.method=="POST":

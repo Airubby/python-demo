@@ -73,16 +73,24 @@ def host(request):
 
 def test_ajax(request):
     #print(request.method,request.POST.get('user'),request.GET.get('pwd'),sep='\t')
-    h = request.POST.get('hostname')
-    i = request.POST.get('ip')
-    p = request.POST.get('port')
-    b = request.POST.get('b_id')
-    if h and len(h)>5:
-        models.Host.objects.create(hostname=h,
-                                   ip=i,
-                                   port=p,
-                                   b_id=b
-                                   )
-        return HttpResponse('ok')
-    else:
-        return HttpResponse('太短了')
+    import json
+    ret={'status':True,'error':None,'data':None}
+    try:
+        h = request.POST.get('hostname')
+        i = request.POST.get('ip')
+        p = request.POST.get('port')
+        b = request.POST.get('b_id')
+        if h and len(h) > 5:
+            models.Host.objects.create(hostname=h,
+                                       ip=i,
+                                       port=p,
+                                       b_id=b
+                                       )
+        else:
+            ret['status']=False
+            ret['error']="太短了"
+    except Exception as e:
+        ret['status'] = False
+        ret['error'] = "请求错误"
+
+    return HttpResponse(json.dumps(ret))  #序列化

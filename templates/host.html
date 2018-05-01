@@ -150,10 +150,11 @@
                     //data: $('#add_form').serialize(),
                     success: function(data){
                         console.log(data)
-                        if(data=="ok"){
+                        var obj=JSON.parse(data)
+                        if(obj.status){
                             location.reload()
                         }else{
-                            alert(data)
+                            $("#erro_msg").text(obj.error)
                         }
                     }
                 })

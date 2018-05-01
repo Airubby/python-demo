@@ -126,7 +126,9 @@
             </div>
 
             <input type="submit" value="提交" />
+            <a id="ajax_submit" >悄悄提交</a>
             <input id="cancel" type="button" value="取消" />
+            <span id="erro_msg" style="color: red"></span>
         </form>
 
     </div>
@@ -137,6 +139,26 @@
             $('#add_host').click(function(){
                 $('.shade,.add-modal').removeClass('hide');
             });
+            $('#cancel').click(function(){
+                $('.shade,.add-modal').addClass('hide');
+            });
+            $('#ajax_submit').click(function(){
+                $.ajax({
+                    url: "/app01/test_ajax",
+                    type: 'POST',
+                    data: {'hostname': $('#host').val(), 'ip': $('#ip').val(), 'port': $('#port').val(), 'b_id': $('#sel').val()},
+                    //data: $('#add_form').serialize(),
+                    success: function(data){
+                        console.log(data)
+                        if(data=="ok"){
+                            location.reload()
+                        }else{
+                            alert(data)
+                        }
+                    }
+                })
+            });
+
         })
     </script>
 

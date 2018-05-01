@@ -34,3 +34,5 @@
 
 7、创建超级用户
     python manage.py createsuperuser
+
+搜索coding设置编码

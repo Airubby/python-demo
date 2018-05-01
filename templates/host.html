@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .hide{
+            display: none;
+        }
+        .shade{
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            background: black;
+            opacity: 0.6;
+            z-index: 100;
+        }
+        .add-modal,.edit-modal{
+            position: fixed;
+            height: 300px;
+            width: 400px;
+            top:100px;
+            left: 50%;
+            z-index: 101;
+            border: 1px solid red;
+            background: white;
+            margin-left: -200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>主机列表</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>主机名</th>
+                <th>IP</th>
+                <th>端口</th>
+                <th>业务线名称</th>
+            </tr>
+        </thead>
+        <tbody>
+
+                {% for row in v1 %}
+                    <tr hid="{{ row.nid }}" bid="{{ row.b_id }}">
+                        <td>{{ row.hostname }}</td>
+                        <td>{{ row.ip }}</td>
+                        <td>{{ row.port }}</td>
+                        <td>{{ row.b.caption }}</td>
+                    </tr>
+                {% endfor %}
+
+
+        </tbody>
+    </table>
+
+</body>
+</html>

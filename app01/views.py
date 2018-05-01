@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 from app01 import models
 
 # Create your views here.
@@ -42,3 +42,13 @@ def business(request):
     # [(1,'运营部'),(2,'运营部')]
 
     return render(request,'business.html',{'v1':v1,'v2':v2,'v3':v3})
+
+def business_add(request):
+    return HttpResponse("OK")
+
+
+def host(request):
+    v1 = models.Host.objects.filter(nid__gt=0)  #nid>0 等价于.all()
+
+    return render(request, 'host.html', {'v1': v1})
+    #return HttpResponse("test")

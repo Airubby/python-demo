@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from app01 import models
 
 # Create your views here.
@@ -48,9 +48,24 @@ def business_add(request):
 
 
 def host(request):
-    v1 = models.Host.objects.filter(nid__gt=0)  #nid>0 等价于.all()
 
-    v2=models.Host.objects.filter(nid__gt=0).values('nid','hostname','b_id','b__caption')
-    #字典跨表要用__（b__caption）
-    v3=models.Host.objects.filter(nid__gt=0).values_list('nid','hostname','b_id','b__caption')
-    return render(request, 'host.html', {'v1': v1,'v2':v2,'v3':v3})
+    if request.method=='GET':
+        v1 = models.Host.objects.filter(nid__gt=0)  #nid>0 等价于.all()
+        v2=models.Host.objects.filter(nid__gt=0).values('nid','hostname','b_id','b__caption')
+        #字典跨表要用__（b__caption）
+        v3=models.Host.objects.filter(nid__gt=0).values_list('nid','hostname','b_id','b__caption')
+
+        b_list=models.Business.objects.all()
+
+        return render(request, 'host.html', {'v1': v1,'v2':v2,'v3':v3,'b_list':b_list})
+    elif request.method=="POST":
+        h = request.POST.get('hostname')
+        i = request.POST.get('ip')
+        p = request.POST.get('port')
+        b = request.POST.get('b_id')
+        models.Host.objects.create(hostname=h,
+                                   ip=i,
+                                   port=p,
+                                   b_id=b
+                                   )
+        return redirect('/app01/host')

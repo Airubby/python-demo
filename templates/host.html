@@ -50,7 +50,7 @@
 
                 {% for row in v1 %}
                     <tr hid="{{ row.nid }}" bid="{{ row.b_id }}">
-                        <td>{{ forloop.counter }}</td>
+                        <td>{{ forloop.counter }}</td><!--forloop.counter0从0开始；forloop.first；forloop.last-->
                         <td>{{ row.hostname }}</td>
                         <td>{{ row.ip }}</td>
                         <td>{{ row.port }}</td>
@@ -102,6 +102,43 @@
         </tbody>
     </table>
 
+    <div class="shade hide"></div>
+    <div class="add-modal hide">
+        <form id="add_form" method="POST" action="{{ request.path_info }}">
+            <div class="group">
+                <input id="host" type="text" placeholder="主机名" name="hostname" />
+            </div>
+
+            <div class="group">
+                <input id="ip" type="text" placeholder="IP" name="ip" />
+            </div>
+
+            <div class="group">
+                <input id="port" type="text" placeholder="端口" name="port" />
+            </div>
+
+            <div class="group">
+                <select id="sel" name="b_id">
+                    {% for op in b_list %}
+                    <option value="{{ op.id }}">{{ op.caption }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <input type="submit" value="提交" />
+            <input id="cancel" type="button" value="取消" />
+        </form>
+
+    </div>
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $('#add_host').click(function(){
+                $('.shade,.add-modal').removeClass('hide');
+            });
+        })
+    </script>
 
 </body>
 </html>

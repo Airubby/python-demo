@@ -50,5 +50,7 @@ def business_add(request):
 def host(request):
     v1 = models.Host.objects.filter(nid__gt=0)  #nid>0 等价于.all()
 
-    return render(request, 'host.html', {'v1': v1})
-    #return HttpResponse("test")
+    v2=models.Host.objects.filter(nid__gt=0).values('nid','hostname','b_id','b__caption')
+    #字典跨表要用__（b__caption）
+    v3=models.Host.objects.filter(nid__gt=0).values_list('nid','hostname','b_id','b__caption')
+    return render(request, 'host.html', {'v1': v1,'v2':v2,'v3':v3})

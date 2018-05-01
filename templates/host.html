@@ -31,30 +31,77 @@
     </style>
 </head>
 <body>
-    <h1>主机列表</h1>
+    <h1>主机列表(对象)</h1>
+    <div>
+        <input id="add_host" type="button" value="添加" />
+    </div>
     <table border="1">
         <thead>
             <tr>
+                <th>序号</th>
                 <th>主机名</th>
                 <th>IP</th>
                 <th>端口</th>
                 <th>业务线名称</th>
+                <th>操作</th>
             </tr>
         </thead>
         <tbody>
 
                 {% for row in v1 %}
                     <tr hid="{{ row.nid }}" bid="{{ row.b_id }}">
+                        <td>{{ forloop.counter }}</td>
                         <td>{{ row.hostname }}</td>
                         <td>{{ row.ip }}</td>
                         <td>{{ row.port }}</td>
                         <td>{{ row.b.caption }}</td>
+                        <td>
+                            <a class="edit">编辑</a>|<a class="delete">删除</a>
+                        </td>
                     </tr>
                 {% endfor %}
 
 
         </tbody>
     </table>
+
+    <h1>主机列表(字典)</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>主机名</th>
+                <th>业务线名称</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in v2 %}
+                <tr hid="{{ row.nid }}" bid="{{ row.b_id }}">
+                    <td>{{ row.hostname }}</td>
+                    <td>{{ row.b__caption }}</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+    <h1>主机列表(元组)</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>主机名</th>
+                <th>业务线名称</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in v3 %}
+                <tr hid="{{ row.0 }}" bid="{{ row.2 }}">
+                    <td>{{ row.1 }}</td>
+                    <td>{{ row.3 }}</td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
 
 </body>
 </html>

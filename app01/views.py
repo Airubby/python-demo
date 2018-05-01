@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from app01 import models
 
 # Create your views here.
 def login(request):
@@ -28,3 +29,16 @@ def login(request):
         else:
             error_msg="用户名或密码错误"
     return render(request,'login.html',{'error_msg':error_msg})
+
+def business(request):
+    v1=models.Business.objects.all()
+    #QuerySet
+    #[obj(id,caption,code),obj(id,caption,code),obj(id,caption,code)]
+    v2=models.Business.objects.all().values('id','caption')
+    # QuerySet
+    # [{'id':1,'caption':'运营部'},{'id':1,'caption':'运营部'},{'id':1,'caption':'运营部'}]
+    v3 = models.Business.objects.all().values_list('id', 'caption')
+    # QuerySet
+    # [(1,'运营部'),(2,'运营部')]
+
+    return render(request,'business.html',{'v1':v1,'v2':v2,'v3':v3})

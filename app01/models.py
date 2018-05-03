@@ -16,4 +16,22 @@ class Host(models.Model):
     port=models.IntegerField()
     b=models.ForeignKey(to="Business",to_field='id',on_delete=models.CASCADE)
 
+class Application(models.Model):
+    name=models.CharField(max_length=32)
+    r=models.ManyToManyField("Host")  #写了这个就不用写自定义关系表了，django自动创建，这个只能写一个
+    #自定义可以写多个，自定义比较推荐
+
+#多对多，自定义关系表
+# class HostToApp(models.Model):
+#     hobj=models.ForeignKey(to='Host',to_field='nid',on_delete=models.CASCADE)
+#     aobj=models.ForeignKey(to='Application',to_field='id',on_delete=models.CASCADE)
+
+
+
+
+
+
+
+
+
 

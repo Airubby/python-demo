@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect
 from app01 import models
-
+import json
 # Create your views here.
 def login(request):
     # f = open('templates/login.html', 'r', encoding='utf-8')
@@ -73,7 +73,7 @@ def host(request):
 
 def test_ajax(request):
     #print(request.method,request.POST.get('user'),request.GET.get('pwd'),sep='\t')
-    import json
+
     ret={'status':True,'error':None,'data':None}
     try:
         h = request.POST.get('hostname')
@@ -94,3 +94,43 @@ def test_ajax(request):
         ret['error'] = "请求错误"
 
     return HttpResponse(json.dumps(ret))  #序列化
+
+
+def application(request):
+    if request.method=="GET":
+
+        app_list=models.Application.objects.all()
+        host_list=models.Host.objects.all()
+        return render(request,'app.html',{"app_list":app_list,'host_list':host_list})
+    elif request.method=="POST":
+        app_name=request.POST.get('app_name')
+        host_list=request.POST.getlist('host_list')
+
+        obj=models.Application.objects.create(name=app_name)
+        obj.r.add(*host_list)
+
+        return redirect('/app01/application')
+
+
+def ajax_add_app(request):
+    ret={'status':True,'error':None,'data':None}
+    print(request.POST.get('app_name'))
+    print(request.POST.get('host_list'))
+    app_name = request.POST.get('app_name')
+    host_list = request.POST.getlist('host_list')
+
+    obj = models.Application.objects.create(name=app_name)
+    obj.r.add(*host_list)
+
+    return HttpResponse(json.dumps(ret))
+
+
+
+
+
+
+
+
+
+
+

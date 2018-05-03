@@ -35,5 +35,6 @@ urlpatterns=[
     re_path('admin/', admin.site.urls),
     re_path('cmdb', include("cmdb.urls")),
     re_path('app01', include("app01.urls")),
+    re_path('app02', include("app02.urls")),
 ]
 

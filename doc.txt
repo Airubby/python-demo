@@ -4,6 +4,7 @@
 2. 创建APP
     cd 工程名
     python manage.py startapp cmdb
+    如果要路由分发，则在cmdb下新建urls.py;进行
 
 3、静态文件
     project.settings.py

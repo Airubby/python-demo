@@ -87,7 +87,20 @@
 
 
     </div>
+    <div class="edit-modal hide">
+        <form id="edit_form" method="POST" action="/host">
+                <input type="text" name="nid" style="display:none" />
+                <input type="text" placeholder="应用名称" name="app" />
+                <select name="host_list" multiple>
+                    {% for op in host_list %}
+                        <option value="{{ op.nid }}">{{ op.hostname }}</option>
+                    {% endfor %}
+                </select>
+            <a id="ajax_submit_edit" >确认编辑</a>
+        </form>
 
+
+    </div>
 
 
      <script src="/static/js/jquery.min.js"></script>
@@ -118,6 +131,28 @@
 
                 })
             });
+            $('.edit').click(function(){
+
+                $('.edit-modal,.shade').removeClass('hide');
+
+                var hid_list = [];
+                $(this).parent().prev().children().each(function(){
+                    var hid = $(this).attr('hid');
+                    hid_list.push(hid)
+                });
+
+                $('#edit_form').find('select').val(hid_list);
+                // 如果发送到后台
+                //
+                /*
+                obj = models.Application.objects.get(id=ai)
+                obj.name = "新Name"
+                obj.save()
+                obj.r.set([1,2,3,4])
+                */
+
+
+            })
 
         })
 

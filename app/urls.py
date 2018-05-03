@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import re_path,include
-#from cmdb import views
+
 
 """
 #如果多个模块的views引入，这样就不好，因为每个模块分工开发的时候要修改url都要来这个页面，冲突或者
 #重复的问题就有了
+#from cmdb import views
 urlpatterns = [
     re_path('admin/', admin.site.urls),
     # path('home', views.home),
@@ -31,10 +32,13 @@ urlpatterns = [
     re_path('detail-(?P<nid>\d+)',views.detail), #这样传参views.py中就匹配nid的参数，无论形式参数先后顺序，传多个参数
 ]
 """
+
+
 urlpatterns=[
     re_path('admin/', admin.site.urls),
     re_path('cmdb', include("cmdb.urls")),
     re_path('app01', include("app01.urls")),
     re_path('app02', include("app02.urls")),
+    re_path('a', include("app02.urls",namespace='author')),  #命名空间
 ]
 

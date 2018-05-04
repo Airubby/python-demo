@@ -15,6 +15,16 @@ def index(request,name):
     return HttpResponse("ok")
 
 
-
+def tpl(request):
+    user_list=[1,2,3]
+    return render(request, 'app02/tpl.html',{'u':user_list})
+def tpl1(request):
+    name='root'
+    return render(request, 'app02/tpl1.html',{'name':name})
+def tpl2(request):
+    status="已删除"
+    return render(request, 'app02/tpl2.html',{'status':status})
+def tpl3(request):
+    return render(request, 'app02/tpl3.html')
 
 

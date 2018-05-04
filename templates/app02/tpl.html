@@ -1,0 +1,16 @@
+{% extends 'app02/master.html' %}
+
+{% block title %}用户管理{% endblock %}
+
+
+{% block content %}
+<h1>用户管理</h1>
+
+    {% for i in u %}
+{% include 'app02/tag.html' %}
+{% endfor %}
+
+
+{% endblock %}
+
+

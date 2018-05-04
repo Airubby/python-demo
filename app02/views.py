@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponse
-
+from django.utils.safestring import mark_safe
 # Create your views here.
 
 def index(request,name):
@@ -27,5 +27,35 @@ def tpl2(request):
 def tpl3(request):
     name="YSDFLSFLAsfsfdf"
     return render(request, 'app02/tpl3.html',{'name':name})
+
+
+LIST=[]
+for i in range(109):
+    LIST.append(i)
+def user_list(request):
+    current_page = request.GET.get('p', 1)
+    current_page=int(current_page)
+    start=(current_page-1)*10
+    end=current_page*10
+    data=LIST[start:end]
+
+    all_count = len(LIST)
+    count,y=divmod(all_count,10)
+    if y:
+        count+=1
+
+    page_list=[]
+    for i in range(1,count+1):
+        if i==current_page:
+            temp='<a class="page active" href="/app02/user_list/?p=%s">%s</a>' %(i,i)
+        else:
+            temp = '<a class="page" href="/app02/user_list/?p=%s">%s</a>' % (i, i)
+        page_list.append(temp)
+
+    page_str="".join(page_list)
+    page_str=mark_safe(page_str)  #设置html，js代码信任，不然会以字符串显示
+
+    return render(request,'app02/user_list.html',{"li":data,"page_str":page_str})
+
 
 

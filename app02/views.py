@@ -25,6 +25,7 @@ def tpl2(request):
     status="已删除"
     return render(request, 'app02/tpl2.html',{'status':status})
 def tpl3(request):
-    return render(request, 'app02/tpl3.html')
+    name="YSDFLSFLAsfsfdf"
+    return render(request, 'app02/tpl3.html',{'name':name})
 
 

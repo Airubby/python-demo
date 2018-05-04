@@ -37,3 +37,22 @@
     python manage.py createsuperuser
 
 搜索coding设置编码
+
+
+
+
+自定义函数功能simple_tag：
+    1.在任意app下创建templatetags目录然后创建任意xxoo.py文件
+    2.创建template对象 register
+        from django import template
+        from django.utils.safestring import mark_safe
+        register = template.Library()
+    3.
+        @register.simple_tag
+        def func(a1,a2...):
+            return ""
+    4.settings中注册APP
+    5.使用页面顶部 {% load xxoo %}
+    6.使用{% 函数名 arg1 arg2 %}
+    注意：如果提示没有注册，讲xxoo中的代码剪切掉重启服务，然后再粘贴上重启服务就可以了
+

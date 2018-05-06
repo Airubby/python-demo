@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 
 # Create your views here.
 
@@ -47,3 +47,34 @@ def user_list(request):
 
 
 
+##################### cookie ############################
+
+user_info={
+    'dachengzi':{'pwd':'123456'},
+    'kangbazi':{'pwd':'kkk'},
+}
+
+def login(request):
+    if request.method=='GET':
+        return render(request,'app02/login.html')  #这个是templates下面的app02文件夹名
+    if request.method=="POST":
+        u = request.POST.get('username')
+        p = request.POST.get('pwd')
+        dic=user_info.get(u)
+        if not dic:
+            return render(request,'app02/login.html')
+        if dic['pwd']==p:
+            res=redirect('app02/home')  #这个是app02模块的文件名
+            res.set_cookie('usernamecook',u)
+            return res
+
+        else:
+            return render(request,'app02/login.html')
+    #return HttpResponse('OK')
+
+
+def home(request):
+    v=request.COOKIES.get('usernamecook')
+    if not v:
+        return redirect('app02/login')
+    return render(request,'app02/home.html',{'current_user':v})

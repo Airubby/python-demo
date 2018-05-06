@@ -39,6 +39,6 @@ urlpatterns=[
     re_path('cmdb', include("cmdb.urls")),
     re_path('app01', include("app01.urls")),
     re_path('app02', include("app02.urls")),
-    re_path('a', include("app02.urls",namespace='author')),  #命名空间
+    #re_path('a', include("app02.urls",namespace='author')),  #命名空间
 ]
 

@@ -19,12 +19,33 @@
 <body>
     <ul>
         {% for item in li %}
-            {% include 'tempapp02/li.html' %}
+            {% include 'app02/li.html' %}
         {% endfor %}
     </ul>
+    <div>
+        <select onchange="changePageSize(this)" id="ps">
+            <option value="10">10</option>
+             <option value="30">30</option>
+             <option value="50">50</option>
+             <option value="100">100</option>
+        </select>
+    </div>
     <div class="pagination">
         {{ page_str }}
     </div>
-
+    <script src="/static/jquery.min.js"></script>
+     <script src="/static/js/jquery.cookie.js"></script>
+    <script>
+        $(function () {
+            var v=$.cookie('per_page_count',{'path':'/app02/user_list'});
+            $("#ps").val(v)
+        })
+        function changePageSize(_this) {
+            var v=$(_this).val();
+            console.log(v)
+            $.cookie('per_page_count',v,{'path':'/app02/user_list'}); //只有当前页面受影响
+            location.reload()
+        }
+    </script>
 </body>
 </html>

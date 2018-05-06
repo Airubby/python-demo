@@ -38,7 +38,9 @@ def user_list(request):
     current_page = request.GET.get('p', 1)
     current_page=int(current_page)
 
-    page_obj=pagination.Page(current_page,len(LIST))
+    val=request.COOKIES.get('per_page_count')
+    val=int(val)
+    page_obj=pagination.Page(current_page,len(LIST),val)
     data=LIST[page_obj.start:page_obj.end]
 
 
@@ -65,7 +67,7 @@ def login(request):
             return render(request,'app02/login.html')
         if dic['pwd']==p:
             res=redirect('app02/home')  #这个是app02模块的文件名
-            res.set_cookie('usernamecook',u)
+            res.set_cookie('usernamecook',u,max_age=10) #10秒后清空cookies
             return res
 
         else:

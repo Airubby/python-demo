@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cmdb',
     'app01',
     'app02',
+    'app03',
 ]
 
 MIDDLEWARE = [

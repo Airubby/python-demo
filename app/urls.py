@@ -32,13 +32,16 @@ urlpatterns = [
     re_path('detail-(?P<nid>\d+)',views.detail), #这样传参views.py中就匹配nid的参数，无论形式参数先后顺序，传多个参数
 ]
 """
-
+from app03 import views
 
 urlpatterns=[
     re_path('admin/', admin.site.urls),
     re_path('cmdb', include("cmdb.urls")),
     re_path('app01', include("app01.urls")),
     re_path('app02', include("app02.urls")),
+
     #re_path('a', include("app02.urls",namespace='author')),  #命名空间
+    re_path('login$', views.login),
+    re_path('index$', views.index),
 ]
 

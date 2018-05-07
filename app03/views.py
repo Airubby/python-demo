@@ -13,6 +13,11 @@ def login(request):
             #在随机字符串对应的字典中设置相关内容
             request.session['username']=user
             request.session['is_login']=True
+
+            if request.POST.get('rmb',None)=='1':
+                #10秒超时时间，默认是2周
+                request.session.set_expiry(10)
+
             return redirect('/index')
         else:
             return render(request, 'app03/login.html')

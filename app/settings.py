@@ -126,3 +126,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=(
     os.path.join(BASE_DIR,'static'),
 )
+
+#SESSION_COOKIE_SECURE=False  #是否Https传输cookie (默认False）
+#SESSION_COOKIE_AGE=1209600  #session的cookie失效日期（2周默认）
+#SESSION_EXPIRE_AT_BROWSER_CLOSE=False  #是否关闭浏览器使得session过期，默认False
+SESSION_SAVE_EVERY_REQUEST=True   #是否每次请求都保存Session默认为False

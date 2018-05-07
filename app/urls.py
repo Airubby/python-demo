@@ -43,5 +43,7 @@ urlpatterns=[
     #re_path('a', include("app02.urls",namespace='author')),  #命名空间
     re_path('login$', views.login),
     re_path('index$', views.index),
+re_path('logout$', views.logout),
+
 ]
 

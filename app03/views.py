@@ -13,13 +13,23 @@ def login(request):
             #在随机字符串对应的字典中设置相关内容
             request.session['username']=user
             request.session['is_login']=True
-            return redirect(index)
+            return redirect('/index')
         else:
             return render(request, 'app03/login.html')
 
 def index(request):
+    #del request.session['is_login']
+    #request.session.delete('session_key')  删除所有的信息
+    #request.session.clear()
+    #request.session['is_login'] 不存在就要报错
     #获取当前用户的随机字符串，根据随机字符串获取对应的信息
-    if request.session['is_login']:
-        return HttpResponse('OK'+request.session['username'])
+    if request.session.get('is_login',None):
+        #return HttpResponse('OK'+request.session['username'])
+        return render(request,'app03/index.html')
     else:
         return HttpResponse('滚')
+
+
+def logout(request):
+    request.session.clear()   #清除所有
+    return redirect('/login')

@@ -66,7 +66,7 @@ def login(request):
         if not dic:
             return render(request,'app02/login.html')
         if dic['pwd']==p:
-            res=redirect('app02/home')  #这个是app02模块的文件名
+            res=redirect('/app02/home')  #这个是app02模块的文件名
             res.set_cookie('usernamecook',u,max_age=10) #10秒后清空cookies
 
             #加密cook
@@ -94,7 +94,7 @@ def auth(func):
     def inner(reqeust,*args,**kwargs):
         v = reqeust.COOKIES.get('usernamecook')
         if not v:
-            return redirect('app02/login')
+            return redirect('/app02/login')
         return func(reqeust, *args,**kwargs)
     return inner
 

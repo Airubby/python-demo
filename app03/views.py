@@ -48,3 +48,13 @@ def index(request):
 def logout(request):
     request.session.clear()   #清除所有
     return redirect('/login')
+
+
+def test(request):
+    print("到最终了，----")
+    return HttpResponse("中间件")
+
+
+
+
+

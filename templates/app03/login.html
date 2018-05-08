@@ -34,13 +34,20 @@
         $(function () {
             var csrftoken=$.cookie('csrftoken')
 
+            function csrfSafeMethod(method) {
+                return (/^(GET|HEAD|APTIONS|TRACE)$/.test(method));
+            }
+
             //写公共配置就不用给每个ajax请求写headers了
             $.ajaxSetup({
                 beforeSend:function (xhr,settings) {
-                    xhr.setRequestHeader('X-CSRFtoken',csrftoken)
+                    //判断只有POST请求才发安全验证信息
+                    if(!csrfSafeMethod(settings.type)&&!this.crossDomain){
+                        xhr.setRequestHeader('X-CSRFtoken',csrftoken)
+                    }
                 }
             })
-            
+
 
             $("#btn1").click(function () {
                 $.ajax({

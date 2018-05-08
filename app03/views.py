@@ -1,4 +1,9 @@
 from django.shortcuts import render,redirect,HttpResponse
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
+#每个函数上面加@csrf_exempt表示需要安全验证
+#每个函数上面加@csrf_protect表示不需要安全验证
+#这是对单个设置的，全局设置在settings中MIDDLEWARE的'django.middleware.csrf.CsrfViewMiddleware',表示开启安全验证
+
 
 # Create your views here.
 

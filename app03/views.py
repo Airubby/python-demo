@@ -51,6 +51,7 @@ def logout(request):
 
 
 def test(request):
+    #int('afsadf')  #测试出错执行中间件
     print("到最终了，----")
     return HttpResponse("中间件")
 

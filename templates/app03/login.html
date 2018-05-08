@@ -22,8 +22,50 @@
             <input type="text" id="password" name="password">
         </p>
         <p><input type="checkbox" name="rmb" value="1" /> 10秒免登录</p>
-        <p><input type="submit" value="提交"></p>
+        <p>
+            <input type="submit" value="提交">
+            <input id="btn1" type="button" value="按钮1">
+            <input id="btn2" type="button" value="按钮2">
+        </p>
     </form>
     <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script>
+        $(function () {
+            var csrftoken=$.cookie('csrftoken')
+
+            //写公共配置就不用给每个ajax请求写headers了
+            $.ajaxSetup({
+                beforeSend:function (xhr,settings) {
+                    xhr.setRequestHeader('X-CSRFtoken',csrftoken)
+                }
+            })
+            
+
+            $("#btn1").click(function () {
+                $.ajax({
+                    url:'/login',
+                    type:'post',
+                    data:{'username':'root','password':'xie123'},
+                    //headers:{'X-CSRFtoken':csrftoken}
+                    success:function () {
+                        
+                    }
+                })
+            })
+            $("#btn2").click(function () {
+                $.ajax({
+                    url:'/login',
+                    type:'post',
+                    data:{'username':'root','password':'xie123'},
+                    //headers:{'X-CSRFtoken':csrftoken}
+                    success:function () {
+
+                    }
+                })
+            })
+
+        })
+    </script>
 </body>
 </html>

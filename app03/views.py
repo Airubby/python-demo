@@ -3,6 +3,11 @@ from django.shortcuts import render,redirect,HttpResponse
 # Create your views here.
 
 def login(request):
+
+    from django.conf import settings
+    print(settings.CSRF_HEADER_NAME)
+    #HTTP_X_CSRFTOKEN，HTTP_是django加的所以传X-CSRFtoken，请求头不能有下划线
+
     if request.method=='GET':
         return render(request,'app03/login.html')
     elif request.method=='POST':

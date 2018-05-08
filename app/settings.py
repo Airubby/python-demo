@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -131,3 +131,6 @@ STATICFILES_DIRS=(
 #SESSION_COOKIE_AGE=1209600  #session的cookie失效日期（2周默认）
 #SESSION_EXPIRE_AT_BROWSER_CLOSE=False  #是否关闭浏览器使得session过期，默认False
 SESSION_SAVE_EVERY_REQUEST=True   #是否每次请求都保存Session默认为False
+
+
+#SESSION_ENGINE='django.contrib.sessions.backends.cached_db'  #缓存+数据库保存

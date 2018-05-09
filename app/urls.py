@@ -46,5 +46,6 @@ urlpatterns=[
     re_path('logout$', views.logout),
     re_path('test$', views.test),   #测试中间件
     re_path('cache$', views.cache),
+re_path('signal$', views.signal),
 ]
 

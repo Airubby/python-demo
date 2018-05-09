@@ -65,3 +65,26 @@ def cache(request):
     return render(request,'app03/cache.html',{"ctime":ctime})
 
 
+
+def signal(reuqest):
+    from app03 import models
+
+    obj = models.UserInfo(user='root')
+    print('end')
+    obj.save()
+
+    obj = models.UserInfo(user='root')
+    obj.save()
+
+    obj = models.UserInfo(user='root')
+    obj.save()
+
+    # 自定义信号
+    from sg import pizza_done
+    pizza_done.send(sender="asdfasdf",toppings=123, size=456)
+    # 自定义信号
+
+    return HttpResponse('ok')
+
+
+

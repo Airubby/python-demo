@@ -42,8 +42,11 @@ INSTALLED_APPS = [
     'app02',
     'app03',
 ]
-
+from django.middleware.csrf import CsrfViewMiddleware
+from django.middleware.cache import FetchFromCacheMiddleware
+from django.middleware.cache import UpdateCacheMiddleware
 MIDDLEWARE = [
+'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -54,6 +57,8 @@ MIDDLEWARE = [
     'Middle.m1.Row1',
     'Middle.m1.Row2',
     'Middle.m1.Row3',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+
 ]
 
 ROOT_URLCONF = 'app.urls'
@@ -137,3 +142,12 @@ SESSION_SAVE_EVERY_REQUEST=True   #是否每次请求都保存Session默认为Fa
 
 
 #SESSION_ENGINE='django.contrib.sessions.backends.cached_db'  #缓存+数据库保存
+
+
+# 缓存
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR,'cache')
+    }
+}

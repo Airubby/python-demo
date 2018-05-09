@@ -56,6 +56,12 @@ def test(request):
     return HttpResponse("中间件")
 
 
-
+from django.views.decorators.cache import cache_page
+#对单个函数做缓存
+#@cache_page(10)   #缓存10秒，这个的优先级比。。高
+def cache(request):
+    import time
+    ctime=time.time()
+    return render(request,'app03/cache.html',{"ctime":ctime})
 
 

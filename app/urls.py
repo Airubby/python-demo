@@ -44,6 +44,7 @@ urlpatterns=[
     re_path('login$', views.login),
     re_path('index$', views.index),
     re_path('logout$', views.logout),
-    re_path('test$', views.test),
+    re_path('test$', views.test),   #测试中间件
+    re_path('cache$', views.cache),
 ]
 

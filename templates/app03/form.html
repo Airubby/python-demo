@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div>
+        <form action="{{ request.path_info }}" method="POST">
+            {% csrf_token %}
+            <p><input type="text" name="user">{{ obj.errors.user.0 }}</p>
+            <p><input type="text" name="pwd">{{ obj.errors.pwd.0 }}</p>
+            <p><input type="text" name="email">{{ obj.errors.email.0 }}</p>
+
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+    -->
+    
+    <div>
+        <form action="{{ request.path_info }}" method="POST">
+            {% csrf_token %}
+            <p>{{ obj.user }} {{ obj.errors.user.0 }}</p>
+            <p>{{ obj.pwd }} {{ obj.errors.pwd.0 }}</p>
+            <p>{{ obj.email }}{{ obj.errors.email.0 }}</p>
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+    -->
+     <div>
+        <form action="{{ request.path_info }}" method="POST">
+            {% csrf_token %}
+            {{ obj.as_p }}
+            <input type="submit" value="提交" />
+        </form>
+    </div>
+
+
+</body>
+</html>

@@ -88,3 +88,38 @@ def signal(reuqest):
 
 
 
+######################## FORM ##############
+from django import forms
+
+class FORM(forms.Form):
+    user=forms.CharField(error_messages={'required':'用户名不能为空'})
+    pwd=forms.CharField(
+        max_length=12,min_length=6,
+        error_messages={'required':'密码不能为空','max_length':'密码长度不能大于12','min_length':'密码长度不能小于6'}
+                        )
+    email=forms.EmailField(error_messages={'required':'邮箱不能为空','invalid':'邮箱格式错误'})
+
+
+
+def formh(request):
+    if request.method=="GET":
+        #return render(request, 'app03/form.html')
+        obj=FORM()
+        #这个obj和下面的obj=FORM(request.POST)一样
+        return render(request, 'app03/form.html',{'obj':obj})
+    elif request.method=="POST":
+        #获取用户所有数据
+        #每条数据请求验证，成功获取信息，错误返回错误信息
+        obj=FORM(request.POST)
+        r1=obj.is_valid()
+        if r1:
+            print(obj.cleaned_data)
+            #注册
+            models.UserInfo.objects.create(**obj.cleaned_data)
+        else:
+            print(obj.errors)
+            print(obj.errors['user'][0])  #不能以.user取数据
+            #print(obj.errors.as_json())
+            return render(request,'app03/form.html',{'obj':obj})
+        return redirect('/form')
+

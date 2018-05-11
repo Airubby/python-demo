@@ -90,21 +90,45 @@ def signal(reuqest):
 
 ######################## FORM ##############
 from django import forms
+from django.forms import widgets
+from django.forms import fields
 
 class FORM(forms.Form):
-    user=forms.CharField(error_messages={'required':'用户名不能为空'})
-    pwd=forms.CharField(
-        max_length=12,min_length=6,
-        error_messages={'required':'密码不能为空','max_length':'密码长度不能大于12','min_length':'密码长度不能小于6'}
-                        )
-    email=forms.EmailField(error_messages={'required':'邮箱不能为空','invalid':'邮箱格式错误'})
+    user=fields.CharField(error_messages={'required':'用户名不能为空'},
 
+                          )
+    pwd=fields.CharField(
+        max_length=12,min_length=6,
+        error_messages={'required':'密码不能为空','max_length':'密码长度不能大于12','min_length':'密码长度不能小于6'},
+        widget=widgets.PasswordInput(attrs={'class':'pas'})
+                        )
+    email=fields.EmailField(error_messages={'required':'邮箱不能为空','invalid':'邮箱格式错误'})
+    remark = fields.CharField(required=False,label="备注",initial="备注信息",
+                              widget=widgets.Textarea(attrs={'class': 'user'})
+
+                              )
+    f = fields.FileField()
+
+    # p = fields.FilePathField(path='app01')
+
+    city1 = fields.ChoiceField(
+        choices=[(0, '上海'), (1, '广州'), (2, '东莞')]
+    )
+    city2 = fields.MultipleChoiceField(
+        choices=[(0, '上海'), (1, '广州'), (2, '东莞')]
+    )
 
 
 def formh(request):
     if request.method=="GET":
         #return render(request, 'app03/form.html')
-        obj=FORM()
+        #obj=FORM()
+        dic={
+            "user":'r1',
+            "pwd":'123123',
+            'email':'12323'
+        }
+        obj=FORM(initial=dic)
         #这个obj和下面的obj=FORM(request.POST)一样
         return render(request, 'app03/form.html',{'obj':obj})
     elif request.method=="POST":

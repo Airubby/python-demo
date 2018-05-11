@@ -16,7 +16,7 @@
         </form>
     </div>
     -->
-    
+
     <div>
         <form action="{{ request.path_info }}" method="POST">
             {% csrf_token %}
@@ -35,6 +35,18 @@
         </form>
     </div>
 
+
+
+    <div>
+        <form action="{{ request.path_info }}" method="POST">
+            {% csrf_token %}
+            <p>{{ obj.user }} {{ obj.errors.user.0 }}</p>
+            <p>{{ obj.pwd }} {{ obj.errors.pwd.0 }}</p>
+            <p>{{ obj.email }}{{ obj.errors.email.0 }}</p>
+            <p>{{ obj.remark.label }}{{ obj.remark }}</p>
+            <input type="submit" value="提交" />
+        </form>
+    </div>
 
 </body>
 </html>

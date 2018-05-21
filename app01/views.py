@@ -28,7 +28,7 @@ def login(request):
             return redirect('/home')
         else:
             error_msg="用户名或密码错误"
-    return render(request,'login.html',{'error_msg':error_msg})
+    return render(request, 'app01/login.html', {'error_msg':error_msg})
 
 def business(request):
     v1=models.Business.objects.all()
@@ -41,7 +41,7 @@ def business(request):
     # QuerySet
     # [(1,'运营部'),(2,'运营部')]
 
-    return render(request,'business.html',{'v1':v1,'v2':v2,'v3':v3})
+    return render(request, 'app01/business.html', {'v1':v1, 'v2':v2, 'v3':v3})
 
 def business_add(request):
     return HttpResponse("OK")
@@ -57,7 +57,7 @@ def host(request):
 
         b_list=models.Business.objects.all()
 
-        return render(request, 'host.html', {'v1': v1,'v2':v2,'v3':v3,'b_list':b_list})
+        return render(request, 'app01/host.html', {'v1': v1, 'v2':v2, 'v3':v3, 'b_list':b_list})
     elif request.method=="POST":
         h = request.POST.get('hostname')
         i = request.POST.get('ip')
@@ -101,7 +101,7 @@ def application(request):
 
         app_list=models.Application.objects.all()
         host_list=models.Host.objects.all()
-        return render(request,'app.html',{"app_list":app_list,'host_list':host_list})
+        return render(request, 'app01/app.html', {"app_list":app_list, 'host_list':host_list})
     elif request.method=="POST":
         app_name=request.POST.get('app_name')
         host_list=request.POST.getlist('host_list')

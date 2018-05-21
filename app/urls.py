@@ -32,7 +32,8 @@ urlpatterns = [
     re_path('detail-(?P<nid>\d+)',views.detail), #这样传参views.py中就匹配nid的参数，无论形式参数先后顺序，传多个参数
 ]
 """
-from app03 import views
+
+from publicapp import views
 
 urlpatterns=[
     re_path('admin/', admin.site.urls),
@@ -41,12 +42,17 @@ urlpatterns=[
     re_path('app02', include("app02.urls")),
 
     #re_path('a', include("app02.urls",namespace='author')),  #命名空间
-    re_path('login$', views.login),
-    re_path('index$', views.index),
-    re_path('logout$', views.logout),
-    re_path('test$', views.test),   #测试中间件
-    re_path('cache$', views.cache),
-re_path('signal$', views.signal),
-re_path('formh$', views.formh),
+    # re_path('login$', views.login),
+    # re_path('index$', views.index),
+    # re_path('logout$', views.logout),
+    # re_path('test$', views.test),   #测试中间件
+    # re_path('cache$', views.cache),
+    # re_path('signal$', views.signal),
+    # re_path('formh$', views.formh),
+
+    #以下是公共的学习测试了
+    re_path('index',views.index)
+
+
 ]
 

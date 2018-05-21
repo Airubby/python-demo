@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'app01',
     'app02',
     'app03',
+    'publicapp',
 ]
 from django.middleware.csrf import CsrfViewMiddleware
 from django.middleware.cache import FetchFromCacheMiddleware

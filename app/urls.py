@@ -51,8 +51,11 @@ urlpatterns=[
     # re_path('formh$', views.formh),
 
     #以下是公共的学习测试了
-    re_path('index',views.index)
-
+    re_path('index',views.index),
+    re_path('user_list',views.user_list),
+    re_path('edit-(\d+)',views.user_edit),
+    re_path('upload$',views.upload),
+    re_path('upload_file$',views.upload_file),
 
 ]
 

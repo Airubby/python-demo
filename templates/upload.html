@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .upload{
+            display:inline-block;padding: 10px;background: #000;color: #fff;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1;
+
+        }
+        .file{
+            width: 100px;
+            height: 50px;
+            opacity: 0;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <div style="position: relative;width: 100px;height: 50px;">
+        <input type="file" id="tfile" class="file" name="tfile">
+        <a class="upload">上传</a>
+    </div>
+    <input type="button" value="XHR提交" onclick="xhrSubmit()">
+    <input type="button" value="JQUERY提交" onclick="JQSubmit()">
+
+    <hr/>
+
+    <form id="form1" action="/upload_file" method="POST" enctype="multipart/form-data" target="ifm1">
+        <iframe id="ifm1" name="ifm1" style="display: none;"></iframe>
+        <input type="file" name="filename" onchange="changeUpload()"/>
+        <input type="submit" onclick="iframeSubmit();" value="iframe提交"/>
+    </form>
+    <div id="preview"></div>
+
+
+
+    <script src="static/jquery.min.js"></script>
+    <script>
+        function xhrSubmit() {
+            var file_obj=document.getElementById('tfile').files[0];
+
+            var fd=new FormData();
+            fd.append('username','root');
+            fd.append('filename',file_obj);
+
+            var xhr=new XMLHttpRequest();
+            xhr.open('POST','/upload_file',true);
+            xhr.onreadystatechange=function (ev) {
+                if(xhr.readyState==4){
+                    //接受完毕
+                    var obj=JSON.parse(xhr.responseText);
+                }
+            };
+            xhr.send(fd)
+        }
+        
+        function JQSubmit() {
+            var file_obj=document.getElementById('tfile').files[0];
+
+            var fd=new FormData();
+            fd.append('username','root');
+            fd.append('filename',file_obj);
+
+            $.ajax({
+                url:'/upload_file',
+                type:'POST',
+                data:fd,
+                processData:false,
+                contentType:false,
+                success:function (arg,a1,a2) {
+
+                }
+            })
+        }
+
+        function iframeSubmit() {
+            $('#ifm1').load(function () {
+                console.log($('#ifm1').contents())
+                var text=$('#ifm1').contents().find('body').text();
+                var obj=JSON.parse(text);
+                console.log(obj)
+
+                $("#preview").empty()
+                var imgTag=document.createElement('img')
+                imgTag.src='/'+obj.data;
+                $("#preview").append(imgTag)
+
+            })
+        }
+
+        function changeUpload() {
+            //就可以不用<input type="submit" onclick="iframeSubmit();" value="iframe提交"/>这个了
+            $('#ifm1').load(function () {
+                console.log($('#ifm1').contents())
+                var text=$('#ifm1').contents().find('body').text();
+                var obj=JSON.parse(text);
+                console.log(obj)
+
+                $("#preview").empty()
+                var imgTag=document.createElement('img')
+                imgTag.src='/'+obj.data;
+                $("#preview").append(imgTag)
+
+            })
+            $("#form1").submit()
+        }
+
+    </script>
+
+</body>
+</html>
